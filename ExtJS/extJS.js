@@ -17,7 +17,7 @@ var userStore = Ext.create("Ext.data.Store", {
 
 // Store moreData
 let arr = [];
-const moreData = (n) => {
+const makeRecords = (n) => {
   for (let N = 0; N < n; N++) {
     let record = {
       name: "Milhouse" + N,
@@ -40,8 +40,7 @@ Ext.application({
   launch: function () {
     Ext.create("Ext.grid.Panel", {
       renderTo: document.body,
-      store: useStore,
-      forceFit: true,
+      store: userStore,
       // width: 400,
       // height: 200,
       title: "Application Users",

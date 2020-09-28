@@ -4,20 +4,9 @@ Ext.define("User", {
   fields: ["name", "email", "phone"],
 });
 
-// Store data
-var userStore = Ext.create("Ext.data.Store", {
-  model: "User",
-  data: [
-    { name: "Lisa", email: "lisa@simpsons.com", phone: "555-111-1224" },
-    { name: "Bart", email: "bart@simpsons.com", phone: "555-222-1234" },
-    { name: "Homer", email: "homer@simpsons.com", phone: "555-222-1244" },
-    { name: "Marge", email: "marge@simpsons.com", phone: "555-222-1254" },
-  ],
-});
-
 // Store moreData
 let arr = [];
-const makeRecords = (n) => {
+const moreData = (n) => {
   for (let N = 0; N < n; N++) {
     let record = {
       name: "Milhouse" + N,
@@ -29,9 +18,15 @@ const makeRecords = (n) => {
   return arr;
 };
 
-var moreData = Ext.create("Ext.data.Store", {
+// Store data
+var userStore = Ext.create("Ext.data.Store", {
   model: "User",
-  data: makeRecords(1001),
+  data: [
+    { name: "Lisa", email: "lisa@simpsons.com", phone: "555-111-1224" },
+    { name: "Bart", email: "bart@simpsons.com", phone: "555-222-1234" },
+    { name: "Homer", email: "homer@simpsons.com", phone: "555-222-1244" },
+    { name: "Marge", email: "marge@simpsons.com", phone: "555-222-1254" },
+  ].concat(moreData(1001)),
 });
 
 Ext.application({
@@ -41,6 +36,7 @@ Ext.application({
     Ext.create("Ext.grid.Panel", {
       renderTo: document.body,
       store: userStore,
+      queryMode: "local",
       // width: 400,
       // height: 200,
       title: "Application Users",
